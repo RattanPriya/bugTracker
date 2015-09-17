@@ -13,7 +13,8 @@ document.onclick = function(e) {
         X: e.pageX,
         Y: e.pageY,
         time: e.timeStamp,
-        error: false
+        error: false,
+        id: ''
     }
     if (queue.length < 30) {
         queue.push(click);
@@ -29,9 +30,5 @@ document.onclick = function(e) {
     
 }
 
-window.onerror = function(){
-    console.log(queue[queue.length-1]);
-    queue[queue.length-1].error = true;
-}
 
 
