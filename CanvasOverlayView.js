@@ -17,7 +17,7 @@ var coordinates = [
 ];
 
 
-function drawCircle(x, y) {
+function drawCircle(x, y, opacity) {
     var myCanvas = document.getElementById("myCanvas");
     var context = myCanvas.getContext("2d");
     var centerX = x;
@@ -26,11 +26,23 @@ function drawCircle(x, y) {
 
     context.beginPath();
     context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = 'green';
+    context.fillStyle = "rgba(255,0,255, "+ opacity +")";;
     context.fill();
-    context.lineWidth = 5;
+    context.lineWidth = 1;
     context.strokeStyle = '#003300';
     context.stroke();   
+}
+
+function blink(x,y, num) {
+    if (num > 1){
+        processCoordinates();
+        return;
+    }
+    var delay = 100;
+    setTimeout(function () {
+        drawCircle(x,y, num);
+        blink(x, y, num+.05);
+    }, delay)
 }
 
 function createCanvasOverlay()
@@ -49,16 +61,9 @@ function createCanvasOverlay()
 }
 
 function processCoordinates() {
-    var delay = 2000;
-    setTimeout(function () {
-        // Do Something Here
-        // Then recall the parent function to
-        // create a recursive loop.
-        
-        var coord = getNextCoord();
-        drawCircle(coord.clientX, coord.clientY);
-        processCoordinates();
-    }, 2000);
+    var initOpacity = 0;
+    var coord = getNextCoord();
+    drawCircle(coord.clientX, coord.clientY, initOpacity);
 }
 
 function getNextCoord(){
