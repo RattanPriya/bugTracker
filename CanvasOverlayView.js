@@ -49,9 +49,20 @@ function createCanvasOverlay()
 }
 
 function processCoordinates() {
-    for (var i = 0; i < coordinates.length; i++){
-        drawCircle(coordinates[i].clientX, coordinates[i].clientY);
-    }
+    var delay = 2000;
+    setTimeout(function () {
+        // Do Something Here
+        // Then recall the parent function to
+        // create a recursive loop.
+        
+        var coord = getNextCoord();
+        drawCircle(coord.clientX, coord.clientY);
+        processCoordinates();
+    }, 2000);
+}
+
+function getNextCoord(){
+    return coordinates.shift();
 }
 
 function init() {
