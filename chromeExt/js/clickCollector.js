@@ -15,7 +15,6 @@ document.onclick = function(e) {
         time: e.timeStamp,
         error: false
     }
-    debugger;
     if (queue.length < 30) {
         queue.push(click);
         var node = document.createElement("div");                 // Create a <li> node
