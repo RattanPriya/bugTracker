@@ -221,7 +221,7 @@ function getNextCoord(){
     return coordinates.shift();
 }
 
-function init() {
+function startDrawing() {
     createCanvasOverlay();
     processNextCoordinate();
 
@@ -240,4 +240,4 @@ function timeout () {
 }
 
 
-init();
+startDrawing();
