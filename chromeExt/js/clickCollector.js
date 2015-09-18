@@ -2,6 +2,7 @@
 
 
 var queue = [];
+var QUEUE_SIZE = 30;
 
 var dataDump = document.createElement("div");
 dataDump.setAttribute("id", "data_dump");
@@ -38,7 +39,7 @@ document.onclick = function(e) {
     if (id!=='none') {
           click.id = id;
     }
-    if (queue.length < 30) {
+    if (queue.length < QUEUE_SIZE) {
         queue.push(click);
         var node = document.createElement("div");                 // Create a <li> node
         var textnode = document.createTextNode(JSON.stringify(click));         // Create a text node

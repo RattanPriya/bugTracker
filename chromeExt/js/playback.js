@@ -99,7 +99,7 @@ Circle.prototype.render = function(){
         this.retrievedNext = true;
         setTimeout(function(){
             processNextCoordinate();
-        }, 100)
+        }, 1)
     } else {
         if (this.numBlinks == 1){
             this.initialRenderComplete = true;
@@ -242,5 +242,5 @@ function timeout () {
             timeout();
         //}
 
-    }, 60);
+    }, 15);
 }

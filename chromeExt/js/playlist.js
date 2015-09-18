@@ -9,8 +9,14 @@ Player.prototype = {
 }
 
 Player.prototype.init = function() {
+		var item = document.createElement("div");
+		//<li>Blessing it <span class="time">3:24</span></li>
+        var att = item.setAttribute("class" , "play");
+      	var body =  document.getElementsByTagName("body")[0]      
+        body.appendChild(item);      
 /*	document.getElementById("play_clicks").onclick = this.test;
-*/	$('.play').click(this.showList.bind(this));
+*/	/*$('.play').click(this.showList.bind(this));*/
+		document.getElementsByClassName('play')[0].onclick  = this.showList.bind(this);
 
 }
 
