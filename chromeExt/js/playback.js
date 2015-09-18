@@ -5,52 +5,58 @@
 
 //var coordinates = [
 //    {
-//        pageX: 555,
-//        pageY: 555,
+//        X: 555,
+//        Y: 555,
 //        time: 0,
 //        error: false
 //    },
 //    {
-//        pageX: 444,
-//        pageY: 100,
+//        X: 444,
+//        Y: 100,
 //        time: 0,
 //        error: false
 //    },
 //    {
-//        pageX: 555,
-//        pageY: 333,
+//        X: 555,
+//        Y: 333,
 //        time: 0,
-//        error: false
+//        error: true
 //    }
 //];
+//
 
+var QUEUE_SIZE = 30;
 
+var playback = new PlayBack();
 
-var coordinates = queue;
+function PlayBack() {
+    this.coordinates = queue;
+    this.stopRender = false;
+    this.clicks = [];
+    this.counter = 0;
+    this.currentClick = null;
+}
 
-var clicks = [];
-var counter = 0;
 // CIRCLE OBJECTS!
 
 
-function Circle(x, y, count) {
+function Circle(x, y, error, count) {
     this.initialRenderComplete = false;
     this.retrievedNext = false;
 
     this.canvas = document.getElementById("myCanvas");
     this.context = this.canvas.getContext("2d");
     this.radius = 35;
-    this.r = 57;
-    this.g = 195;
-    this.b = 254;
+
     this.x = x;
     this.y = y;
 
+    this.error = error;
+
+    this.setColor();
+
     this.numBlinks = 0;
-
     this.count = count;
-
-    this.strokeStyle = "#39c3fe";
 
     // for blinking
     this.opacity = 0;
@@ -62,7 +68,26 @@ function Circle(x, y, count) {
     this.ringRadiusFadeInIncrement = .6;
     this.radiusFadeOutIncrement = .6;
     this.isFadeIn = true;
+
+    this.isSelected = false;
 }
+
+Circle.prototype.setColor = function (){
+    if (this.error){
+        // Error Color
+        this.r = 225;
+        this.g = 20;
+        this.b = 20;
+        this.strokeStyle = "#ff1414";
+
+    } else {
+        // nonError Color
+        this.r = 57;
+        this.g = 195;
+        this.b = 254;
+        this.strokeStyle = "#39c3fe";
+    }
+};
 
 Circle.prototype.blink = function (numBlinks) {
     if (this.isFadeIn){
@@ -94,6 +119,7 @@ Circle.prototype.fadeOut = function(){
 };
 
 Circle.prototype.render = function(){
+
     // draw the Circle. If the circle has completed one fade in cycle, initialRenderComplete is true and we get the next coordinate.
     if (this.initialRenderComplete && !this.retrievedNext) {
         this.retrievedNext = true;
@@ -108,14 +134,32 @@ Circle.prototype.render = function(){
         if (!this.initialRenderComplete){
             this.blink();
         } else {
-            this.ringRadius = 15;
-            this.radius = 15;
+
+            // if error
+            if (this.error){
+                this.opacity = .5;
+            }
+
+            if (this.isSelected){
+                this.radius = 35;
+                this.ringRadius = 45;
+                this.opacity = .5;
+            } else {
+                // initial render is complete so fix the radius of the bubbles
+                this.ringRadius = 15;
+                this.radius = 15;
+            }
         }
     }
 
     this.drawCircle();
     this.insertNumber();
 
+};
+
+Circle.prototype.selected = function() {
+    this.isSelected = true;
+    render();
 };
 
 Circle.prototype.pulse = function() {
@@ -155,7 +199,6 @@ Circle.prototype.drawCircle = function () {
     this.context.strokeStyle = this.strokeStyle;
     this.context.stroke();
 
-
     // ring
     this.context.beginPath();
     this.context.arc(centerX, centerY, this.ringRadius, 0, 2 * Math.PI, false);
@@ -164,13 +207,11 @@ Circle.prototype.drawCircle = function () {
     this.context.lineWidth = 1;
     this.context.strokeStyle = this.strokeStyle;
     this.context.stroke();
-
-
 };
 
 
 
-// MAIN FUNCTIONS
+// CANVAS FUNCTIONS
 
 function clear() {
     var canvas = document.getElementById("myCanvas");
@@ -180,19 +221,14 @@ function clear() {
 
 function render() {
     clear();
-    for (var i = 0; i < clicks.length; i ++){
-        clicks[i].render();
+    for (var i = 0; i < playback.clicks.length; i ++){
+        playback.clicks[i].render();
+
     }
 }
 
 function shouldRender() {
-    for (var i = 0; i < clicks.length; i ++){
-        if (clicks[i].initialRenderComplete){
-            return true;
-        }
-    }
-
-    return false;
+    return playback.stopRender|| playback.counter == QUEUE_SIZE ? false : true
 }
 
 
@@ -211,23 +247,38 @@ function createCanvasOverlay()
     myCanvas.height=myCanvas.offsetHeight;
 }
 
+
+// REWIND BUTTON
+
+
+
+
+
+
+
+// PROCESS COORDS
+
 function processNextCoordinate() {
     var coord = getNextCoord();
     if (!coord){
+        playback.stopRender = true;
+        playback.currentClick.selected();
         return
     }
-
-    counter++;
-    var circle = new Circle(coord.X, coord.Y, counter);
-    clicks.push(circle);
+    var circle = new Circle(coord.X, coord.Y, coord.error, playback.counter+1);
+    playback.clicks.push(circle);
+    playback.currentClick = playback.clicks[playback.counter];
+    playback.counter++;
     circle.render();
 }
 
 function getNextCoord(){
-    return coordinates.shift();
+    return playback.coordinates[playback.counter];
 }
 
 function startDrawing() {
+
+
     createCanvasOverlay();
     processNextCoordinate();
 
@@ -237,10 +288,10 @@ function startDrawing() {
 
 function timeout () {
     setTimeout(function() {
-        //if (shouldRender()){
+        if (shouldRender()){
             render();
             timeout();
-        //}
+        }
 
     }, 15);
 }
