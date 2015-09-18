@@ -9,16 +9,19 @@ Player.prototype = {
 }
 
 Player.prototype.init = function() {
-	document.getElementById("play_clicks").onclick = this.showList();
+/*	document.getElementById("play_clicks").onclick = this.test;
+*/	$('.play').click(this.showList.bind(this));
+
 }
 
-Player.prototype.showList = function() {
+Player.prototype.showList = function(e) {
 	var data = queue;	
 	var state = this.getNextState();
 
 	var list = document.getElementById("click-list");
+	startDrawing();
 	list.textContent = '';
-
+	this.setVisibility();
 	for (var i = queue.length-1; i >= 0; i-- ) {
 		var click = queue[i];
 		var item = document.createElement("li");
@@ -34,18 +37,20 @@ Player.prototype.setVisibility = function() {
 	if (this.state  === "play") {
 		var list = document.getElementById("click-list");
 			list.style.visibility = "visible";
-			document.onclick = function() {
+		/*	document.onclick = function() {
 				var click = queue.unshift();
 				var item = document.createElement("li");
 			    var textnode = document.createTextNode(click.X + " " +click.Y);
+    			document.getElementById(click.parentid).style.border = "3px solid red";
 		        item.appendChild(textnode);         
 		        list.appendChild(item);                     
 		        console.log(document.elementFromPoint(click.X, click.Y));	
-			}
+			}*/
+
 
 	} else if (this.state  === "start"){
 		var list = document.getElementById("click-list");
-			/*list.style.visibility = "hidden";*/
+			list.style.visibility = "hidden";
 		
 	} else if (this.state === "pause") {
 		var list = document.getElementById("click-list");
@@ -67,8 +72,8 @@ Player.prototype.getNextState = function() {
 
 
 window.onerror = function(){
-    console.log(queue[queue.length-1]);
-queue[queue.length-1].error = true;
+	console.log(queue[queue.length-1]);
+	queue[queue.length-1].error = true;
 }
 
 window.onload = init();
