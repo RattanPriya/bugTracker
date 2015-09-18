@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/play.css">
+</head>
+<body>
+	<a href="#" title="Play video" class="play"></a>
+</body>
+<script src="js/lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var icon = $('.play');
+		icon.click(function() {
+			icon.toggleClass('active');
+			return false;
+		});
+	});
+</script>
+<script src="playlist.js"></script>
+
+</html>
