@@ -28,6 +28,9 @@ app.get('/', function(req, res){
 app.get('/sequence', function(req, res){
   res.sendFile(__dirname + '/client/views/sequence.html');
 });
+app.get('//visit-sequences.csv', function(req, res){
+  res.sendFile(__dirname + '/client/views/visit-sequences.csv');
+});
 
 //Can pass data through url
 //http://localhost:3000/api/test?name=matin&birth=yes&death=no

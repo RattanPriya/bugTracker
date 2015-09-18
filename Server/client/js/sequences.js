@@ -3,6 +3,10 @@ var width = 750;
 var height = 600;
 var radius = Math.min(width, height) / 2;
 var colorsDefs = {
+  lime:    '#01ff70',
+  navy:    '#001f3f',
+  teal:    '#39cccc',
+  olive:   '#3d9970',
   maroon:  '#85144b',
   orange:  '#ff851b',
   purple:  '#b10dc9',
@@ -13,10 +17,6 @@ var colorsDefs = {
   silver:  '#dddddd',
   aqua:    '#7fdbff',
   blue:    '#0074d9',
-  lime:    '#01ff70',
-  navy:    '#001f3f',
-  teal:    '#39cccc',
-  olive:   '#3d9970',
   green:   '#2ecc40',
   red:     '#ff4136'
 };
@@ -25,158 +25,318 @@ for(var x in colorsDefs){
   colorArray.push(x);
 }
 
+// var jsonData =
+// {
+//   "className": "top",
+//   "children": [
+//     {
+//       "pageX": "1022",
+//       "pageY": "216",
+//       "uri": "http://www.yelp.com/",
+//       "className": "star-img stars_4",
+//       "count": 2,
+//       "children": [
+//         {
+//           "pageX": "1022",
+//           "pageY": "219",
+//           "uri": "http://www.yelp.com/",
+//           "className": "star-img stars_4",
+//           "count": 1,
+//           "children": [
+//             {
+//               "pageX": "1022",
+//               "pageY": "219",
+//               "uri": "http://www.yelp.com/",
+//               "className": "star-img stars_4",
+//               "count": 1,
+//               "children": [
+//                 {
+//                   "pageX": "1022",
+//                   "pageY": "219",
+//                   "uri": "http://www.yelp.com/",
+//                   "className": "star-img stars_4",
+//                   "count": 1,
+//                   "children": [
+//                     {
+//                       "pageX": "1022",
+//                       "pageY": "219",
+//                       "uri": "http://www.yelp.com/",
+//                       "className": "star-img stars_4",
+//                       "count": 1,
+//                       "children": [
+//                         {
+//                           "pageX": "1022",
+//                           "pageY": "219",
+//                           "uri": "http://www.yelp.com/",
+//                           "className": "star-img stars_4",
+//                           "count": 1,
+//                           "children": [
+//                             {
+//                               "pageX": "558",
+//                               "pageY": "686",
+//                               "uri": "http://www.yelp.com/",
+//                               "className": "star-img stars_5",
+//                               "count": 1,
+//                               "children": [
+//                                 {
+//                                   "pageX": "350",
+//                                   "pageY": "703",
+//                                   "uri": "http://www.yelp.com/",
+//                                   "className": "category-title",
+//                                   "count": 1,
+//                                   "children": [
+//                                     {
+//                                       "pageX": "301",
+//                                       "pageY": "775",
+//                                       "uri": "http://www.yelp.com/",
+//                                       "className": "category-title",
+//                                       "count": 1,
+//                                       "children": [
+//                                         {
+//                                           "pageX": "317",
+//                                           "pageY": "820",
+//                                           "uri": "http://www.yelp.com/",
+//                                           "className": "category-title",
+//                                           "count": 1,
+
+//                                         }
+//                                       ]
+//                                     }
+//                                   ]
+//                                 }
+//                               ]
+//                             }
+//                           ]
+//                         }
+//                       ]
+//                     }
+//                   ]
+//                 }
+//               ]
+//             }
+//           ]
+//         }
+//       ]
+//     },
+//     {
+//       "pageX": "319",
+//       "pageY": "144",
+//       "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
+//       "className": "star-img stars_5",
+//       "count": 1,
+//       "children": [
+//         {
+//           "pageX": "353",
+//           "pageY": "149",
+//           "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
+//           "className": "star-img stars_5",
+//           "count": 1,
+//           "children": [
+//             {
+//               "pageX": "664",
+//               "pageY": "65",
+//               "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
+//               "className": "header-nav_link",
+//               "count": 1,
+//               "children": [
+//                 {
+//                   "pageX": "391",
+//                   "pageY": "55",
+//                   "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
+//                   "className": "header-nav_link",
+//                   "count": 1,
+//                   "children": [
+//                     {
+//                       "pageX": "317",
+//                       "pageY": "856",
+//                       "uri": "http://www.yelp.com/",
+//                       "className": "category-title",
+//                       "count": 1,
+//                     }
+//                   ]
+//                 }
+//               ]
+//             }
+//           ]
+//         }
+//       ]
+//     },
+//     {
+//       "pageX": "469",
+//       "pageY": "51",
+//       "uri": "http://www.yelp.com/",
+//       "className": "header-nav_link",
+//       "count": 1,
+//       "children": [
+//         {
+//           "pageX": "695",
+//           "pageY": "167",
+//           "uri": "http://www.yelp.com/chicago",
+//           "className": "embossed-text-white",
+//           "count": 1
+//         }
+//       ]
+//     }
+//   ]
+// }
+
 var jsonData =
 {
-  "className": "top",
-  "children": [
+  "name":"top",
+  "children":
+  [
     {
-      "pageX": "1022",
-      "pageY": "216",
-      "uri": "http://www.yelp.com/",
-      "className": "star-img stars_4",
+      "pageX": "441",
+      "pageY": "447",
+      "uri": "http://www.yelp.com/chicago",
+      "className": "",
       "count": 2,
-      "children": [
-        {
-          "pageX": "1022",
-          "pageY": "219",
-          "uri": "http://www.yelp.com/",
-          "className": "star-img stars_4",
-          "count": 1,
-          "children": [
+      "children":
+      [
+      {
+        "pageX": "1046",
+        "pageY": "221",
+        "uri": "http://www.yelp.com/chicago",
+        "className": "star-img stars_5",
+        "count": 1,
+        "children":
+        [
+          {
+            "pageX": "1291",
+            "pageY": "101",
+            "uri": "http://www.yelp.com/chicago",
+            "className": "main-content-wrap main-content-wrap--box",
+            "count": 1,
+            "children":
+            [
             {
-              "pageX": "1022",
-              "pageY": "219",
-              "uri": "http://www.yelp.com/",
-              "className": "star-img stars_4",
+              "pageX": "25",
+              "pageY": "174",
+              "uri": "http://www.yelp.com/chicago",
+              "className": "main-content-wrap main-content-wrap--box",
               "count": 1,
-              "children": [
-                {
-                  "pageX": "1022",
-                  "pageY": "219",
-                  "uri": "http://www.yelp.com/",
-                  "className": "star-img stars_4",
-                  "count": 1,
-                  "children": [
-                    {
-                      "pageX": "1022",
-                      "pageY": "219",
-                      "uri": "http://www.yelp.com/",
-                      "className": "star-img stars_4",
-                      "count": 1,
-                      "children": [
-                        {
-                          "pageX": "1022",
-                          "pageY": "219",
-                          "uri": "http://www.yelp.com/",
-                          "className": "star-img stars_4",
-                          "count": 1,
-                          "children": [
-                            {
-                              "pageX": "558",
-                              "pageY": "686",
-                              "uri": "http://www.yelp.com/",
-                              "className": "star-img stars_5",
-                              "count": 1,
-                              "children": [
-                                {
-                                  "pageX": "350",
-                                  "pageY": "703",
-                                  "uri": "http://www.yelp.com/",
-                                  "className": "category-title",
-                                  "count": 1,
-                                  "children": [
-                                    {
-                                      "pageX": "301",
-                                      "pageY": "775",
-                                      "uri": "http://www.yelp.com/",
-                                      "className": "category-title",
-                                      "count": 1,
-                                      "children": [
-                                        {
-                                          "pageX": "317",
-                                          "pageY": "820",
-                                          "uri": "http://www.yelp.com/",
-                                          "className": "category-title",
-                                          "count": 1,
-
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
+              "children":
+              [
+              {
+                "pageX": "393",
+                "pageY": "55",
+                "uri": "http://www.yelp.com/chicago",
+                "className": "header-nav_link",
+                "count": 1
+              }
               ]
             }
-          ]
-        }
+            ]
+          }
+        ]
+      }
       ]
     },
     {
-      "pageX": "319",
-      "pageY": "144",
-      "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
-      "className": "star-img stars_5",
-      "count": 1,
-      "children": [
-        {
-          "pageX": "353",
-          "pageY": "149",
-          "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
-          "className": "star-img stars_5",
-          "count": 1,
-          "children": [
-            {
-              "pageX": "664",
-              "pageY": "65",
-              "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
-              "className": "header-nav_link",
-              "count": 1,
-              "children": [
-                {
-                  "pageX": "391",
-                  "pageY": "55",
-                  "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
-                  "className": "header-nav_link",
-                  "count": 1,
-                  "children": [
-                    {
-                      "pageX": "317",
-                      "pageY": "856",
-                      "uri": "http://www.yelp.com/",
-                      "className": "category-title",
-                      "count": 1,
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "pageX": "469",
-      "pageY": "51",
-      "uri": "http://www.yelp.com/",
+      "pageX": "444",
+      "pageY": "63",
+      "uri": "http://www.yelp.com/oakland",
       "className": "header-nav_link",
-      "count": 1,
-      "children": [
-        {
-          "pageX": "695",
-          "pageY": "167",
-          "uri": "http://www.yelp.com/chicago",
-          "className": "embossed-text-white",
-          "count": 1
+      "count": 2,
+      "children":
+      [
+      {
+        "pageX": "1157",
+        "pageY": "109",
+        "uri": "http://www.yelp.com/oakland",
+        "className": "main-box-toggle",
+        "count": 1,
+        "children":
+        [
+         {
+          "pageX": "554",
+          "pageY": "291",
+          "uri": "http://www.yelp.com/oakland",
+          "className": "clearfix",
+          "count": 1,
+          "children":
+          [
+           {
+            "pageX": "1050",
+            "pageY": "214",
+            "uri": "http://www.yelp.com/oakland",
+            "className": "star-img stars_5",
+            "count": 1,
+            "children":
+            [
+            {
+              "pageX": "563",
+              "pageY": "1266",
+              "uri": "http://www.yelp.com/oakland",
+              "className": "biz-name",
+              "count": 1
+            }
+            ]
+          }
+          ]
         }
+        ]
+      }
+      ]
+    },
+    {
+      "pageX": "441",
+      "pageY": "447",
+      "uri": "http://www.yelp.com/chicago",
+      "className": "",
+      "count": 2,
+      "children":
+      [
+      {
+        "pageX": "1046",
+        "pageY": "221",
+        "uri": "http://www.yelp.com/chicago",
+        "className": "star-img stars_5",
+        "count": 1,
+        "children":
+        [
+          {
+            "pageX": "1291",
+            "pageY": "101",
+            "uri": "http://www.yelp.com/chicago",
+            "className": "main-content-wrap main-content-wrap--box",
+            "count": 1,
+            "children":
+            [
+            {
+              "pageX": "25",
+              "pageY": "174",
+              "uri": "http://www.yelp.com/chicago",
+              "className": "main-content-wrap main-content-wrap--box",
+              "count": 1,
+              "children":
+              [
+              {
+                "pageX": "393",
+                "pageY": "55",
+                "uri": "http://www.yelp.com/chicago",
+                "className": "header-nav_link",
+                "count": 1
+              }
+              ]
+            }
+            ]
+          }
+        ]
+      }
       ]
     }
+
+
+    //,
+    // {
+    //   "pageX": "440",
+    //   "pageY": "453",
+    //   "uri": "http://www.yelp.com/",
+    //   "className": "",
+    //   "count": 1
+    // }
+
   ]
 }
 
@@ -411,6 +571,7 @@ function drawLegend() {
   var li = {
     w: 200, h: 60, s: 3, r: 3
   };
+  // var newMapping = colorToNamesMapping
 
   var legend = d3.select("#legend").append("svg:svg")
       .attr("width", li.w)
@@ -436,8 +597,6 @@ function drawLegend() {
       .attr("dy", "0.35em")
       .attr("text-anchor", "middle")
       .text(function(d) {
-        console.log(d);
-        debugger;
         var str = "";
         for(var x in d.value){
           str += d.value[x] + '\n';
@@ -454,3 +613,551 @@ function toggleLegend() {
     legend.style("visibility", "hidden");
   }
 }
+
+
+var jsonDataFacebook = [
+  {
+    "pageX": "791",
+    "pageY": "781",
+    "uri": "http://www.yelp.com/palo-alto",
+    "className": "star-img stars_4_half",
+    "count": 1,
+    "children": {
+      "pageX": "799",
+      "pageY": "887",
+      "uri": "http://www.yelp.com/palo-alto",
+      "className": "star-img stars_5",
+      "count": 1,
+      "children": {
+        "pageX": "794",
+        "pageY": "982",
+        "uri": "http://www.yelp.com/palo-alto",
+        "className": "star-img stars_4_half",
+        "count": 1,
+        "children": {
+          "pageX": "553",
+          "pageY": "715",
+          "uri": "http://www.yelp.com/palo-alto",
+          "className": "category-title",
+          "count": 1,
+          "children": {
+            "pageX": "770",
+            "pageY": "53",
+            "uri": "http://www.yelp.com/palo-alto",
+            "className": "header-nav_link",
+            "count": 1,
+            "children": {
+              "pageX": "632",
+              "pageY": "1299",
+              "uri": "http://www.yelp.com/palo-alto",
+              "className": "star-img stars_5",
+              "count": 1,
+              "children": {
+                "pageX": "631",
+                "pageY": "58",
+                "uri": "http://www.yelp.com/",
+                "className": "header-nav_link",
+                "count": 1,
+                "children": {
+                  "pageX": "719",
+                  "pageY": "59",
+                  "uri": "http://www.yelp.com/",
+                  "className": "header-nav_link",
+                  "count": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "pageX": "1270",
+    "pageY": "217",
+    "uri": "http://www.yelp.com/palo-alto",
+    "className": "star-img stars_5",
+    "count": 1,
+    "children": {
+      "pageX": "794",
+      "pageY": "1084",
+      "uri": "http://www.yelp.com/palo-alto",
+      "className": "star-img stars_4_half",
+      "count": 1,
+      "children": {
+        "pageX": "642",
+        "pageY": "1531",
+        "uri": "http://www.yelp.com/palo-alto",
+        "className": "star-img stars_5",
+        "count": 3,
+        "children": {
+          "pageX": "641",
+          "pageY": "2114",
+          "uri": "http://www.yelp.com/palo-alto",
+          "className": "star-img stars_5",
+          "count": 2,
+          "children": {
+            "pageX": "547",
+            "pageY": "2929",
+            "uri": "http://www.yelp.com/palo-alto",
+            "className": "biz-shim",
+            "count": 1,
+            "children": {
+              "pageX": "1286",
+              "pageY": "214",
+              "uri": "http://www.yelp.com/palo-alto",
+              "className": "star-img stars_5",
+              "count": 1,
+              "children": {
+                "pageX": "705",
+                "pageY": "58",
+                "uri": "http://www.yelp.com/palo-alto",
+                "className": "header-nav_link",
+                "count": 1,
+                "children": {
+                  "pageX": "639",
+                  "pageY": "62",
+                  "uri": "http://www.yelp.com/about",
+                  "className": "header-nav_link",
+                  "count": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "pageX": "690",
+    "pageY": "61",
+    "uri": "http://www.yelp.com/palo-alto",
+    "className": "header-nav_link",
+    "count": 5,
+    "children": {
+      "pageX": "699",
+      "pageY": "61",
+      "uri": "http://www.yelp.com/about",
+      "className": "header-nav_link",
+      "count": 4,
+      "children": {
+        "pageX": "641",
+        "pageY": "66",
+        "uri": "http://www.yelp.com/about",
+        "className": "header-nav_link",
+        "count": 5,
+        "children": {
+          "pageX": "631",
+          "pageY": "60",
+          "uri": "http://www.yelp.com/about",
+          "className": "header-nav_link",
+          "count": 3,
+          "children": {
+            "pageX": "638",
+            "pageY": "61",
+            "uri": "http://www.yelp.com/la",
+            "className": "header-nav_link",
+            "count": 2,
+            "children": {
+              "pageX": "698",
+              "pageY": "61",
+              "uri": "http://www.yelp.com/la",
+              "className": "header-nav_link",
+              "count": 2,
+              "children": {
+                "pageX": "795",
+                "pageY": "61",
+                "uri": "http://www.yelp.com/la",
+                "className": "header-nav_link",
+                "count": 2,
+                "children": {
+                  "pageX": "903",
+                  "pageY": "57",
+                  "uri": "http://www.yelp.com/la",
+                  "className": "header-nav_link",
+                  "count": 1,
+                  "children": {
+                    "pageX": "619",
+                    "pageY": "62",
+                    "uri": "http://www.yelp.com/weekly_yelp",
+                    "className": "header-nav_link",
+                    "count": 1,
+                    "children": {
+                      "pageX": "1392",
+                      "pageY": "110",
+                      "uri": "http://www.yelp.com/la",
+                      "className": "main-box-toggle",
+                      "count": 1,
+                      "children": {
+                        "pageX": "588",
+                        "pageY": "1125",
+                        "uri": "http://www.yelp.com/oakland",
+                        "className": "category-title",
+                        "count": 1,
+                        "children": {
+                          "pageX": "552",
+                          "pageY": "793",
+                          "uri": "http://www.yelp.com/oakland",
+                          "className": "category-title",
+                          "count": 1,
+                          "children": {
+                            "pageX": "569",
+                            "pageY": "903",
+                            "uri": "http://www.yelp.com/oakland",
+                            "className": "category-title",
+                            "count": 1,
+                            "children": {
+                              "pageX": "577",
+                              "pageY": "934",
+                              "uri": "http://www.yelp.com/oakland",
+                              "className": "category-title",
+                              "count": 1,
+                              "children": {
+                                "pageX": "577",
+                                "pageY": "677",
+                                "uri": "http://www.yelp.com/oakland",
+                                "className": "category-title",
+                                "count": 1,
+                                "children": {
+                                  "pageX": "620",
+                                  "pageY": "63",
+                                  "uri": "http://www.yelp.com/nyc",
+                                  "className": "header-nav_link",
+                                  "count": 1,
+                                  "children": {
+                                    "pageX": "822",
+                                    "pageY": "58",
+                                    "uri": "http://www.yelp.com/nyc",
+                                    "className": "header-nav_link",
+                                    "count": 1,
+                                    "children": {
+                                      "pageX": "632",
+                                      "pageY": "57",
+                                      "uri": "http://www.yelp.com/about",
+                                      "className": "header-nav_link",
+                                      "count": 1,
+                                      "children": {
+                                        "pageX": "613",
+                                        "pageY": "2544",
+                                        "uri": "http://www.yelp.com/nyc",
+                                        "className": "star-img stars_3",
+                                        "count": 1,
+                                        "children": {
+                                          "pageX": "762",
+                                          "pageY": "2740",
+                                          "uri": "http://www.yelp.com/nyc",
+                                          "className": "loading-msg",
+                                          "count": 1
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "pageX": "812",
+    "pageY": "3641",
+    "uri": "http://www.yelp.com/nyc",
+    "className": "biz-name",
+    "count": 1,
+    "children": {
+      "pageX": "1209",
+      "pageY": "311",
+      "uri": "http://www.yelp.com/c/nyc/steak",
+      "className": "biz-shim",
+      "count": 1,
+      "children": {
+        "pageX": "1200",
+        "pageY": "458",
+        "uri": "http://www.yelp.com/c/nyc/steak",
+        "className": "biz-shim",
+        "count": 1,
+        "children": {
+          "pageX": "630",
+          "pageY": "54",
+          "uri": "http://www.yelp.com/c/nyc/steak",
+          "className": "header-nav_link",
+          "count": 1,
+          "children": {
+            "pageX": "699",
+            "pageY": "60",
+            "uri": "http://www.yelp.com/c/nyc/steak",
+            "className": "header-nav_link",
+            "count": 1,
+            "children": {
+              "pageX": "818",
+              "pageY": "54",
+              "uri": "http://www.yelp.com/c/nyc/steak",
+              "className": "header-nav_link",
+              "count": 1,
+              "children": {
+                "pageX": "899",
+                "pageY": "66",
+                "uri": "http://www.yelp.com/c/nyc/steak",
+                "className": "header-nav_link",
+                "count": 1,
+                "children": {
+                  "pageX": "998",
+                  "pageY": "59",
+                  "uri": "http://www.yelp.com/c/nyc/steak",
+                  "className": "header-nav_link",
+                  "count": 1,
+                  "children": {
+                    "pageX": "931",
+                    "pageY": "1005",
+                    "uri": "http://www.yelp.com/c/nyc/steak",
+                    "className": "star-img stars_5",
+                    "count": 1,
+                    "children": {
+                      "pageX": "608",
+                      "pageY": "921",
+                      "uri": "http://www.yelp.com/c/nyc/steak",
+                      "className": "star-img stars_5",
+                      "count": 1,
+                      "children": {
+                        "pageX": "608",
+                        "pageY": "1005",
+                        "uri": "http://www.yelp.com/c/nyc/steak",
+                        "className": "star-img stars_4",
+                        "count": 1,
+                        "children": {
+                          "pageX": "618",
+                          "pageY": "65",
+                          "uri": "http://www.yelp.com/nyc",
+                          "className": "header-nav_link",
+                          "count": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "pageX": "691",
+    "pageY": "55",
+    "uri": "http://www.yelp.com/nyc",
+    "className": "header-nav_link",
+    "count": 1,
+    "children": {
+      "pageX": "680",
+      "pageY": "433",
+      "uri": "http://www.yelp.com/nyc",
+      "className": "suggestion-content ieSucks",
+      "count": 1,
+      "children": {
+        "pageX": "694",
+        "pageY": "423",
+        "uri": "http://www.yelp.com/nyc",
+        "className": "biz-name",
+        "count": 1,
+        "children": {
+          "pageX": "811",
+          "pageY": "911",
+          "uri": "http://www.yelp.com/menu/dominique-ansel-bakery-new-york/item/macchiato",
+          "className": "star-img stars_4",
+          "count": 1,
+          "children": {
+            "pageX": "739",
+            "pageY": "94",
+            "uri": "http://www.yelp.com/menu/dominique-ansel-bakery-new-york/item/macchiato",
+            "className": "i-wrap ig-wrap-common i-breadcrumb-arrow-common-wrap breadcrumb-wrap",
+            "count": 1,
+            "children": {
+              "pageX": "989",
+              "pageY": "521",
+              "uri": "http://www.yelp.com/advertise",
+              "className": "ybtn ybtn-primary cta",
+              "count": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "pageX": "578",
+    "pageY": "99",
+    "uri": "http://www.yelp.com/menu/dominique-ansel-bakery-new-york/item/house-blend",
+    "className": "",
+    "count": 3,
+    "children": {
+      "pageX": "752",
+      "pageY": "39",
+      "uri": "http://www.yelp.com/advertise/national/enhanced",
+      "className": "header-nav_link",
+      "count": 2,
+      "children": {
+        "pageX": "895",
+        "pageY": "38",
+        "uri": "http://www.yelp.com/advertise/agency/custom",
+        "className": "header-nav_link",
+        "count": 2,
+        "children": {
+          "pageX": "664",
+          "pageY": "42",
+          "uri": "http://www.yelp.com/nyc",
+          "className": "main-header_search responsive-hidden-medium-only",
+          "count": 1,
+          "children": {
+            "pageX": "389",
+            "pageY": "58",
+            "uri": "http://www.yelp.com/about",
+            "className": "header-nav_link",
+            "count": 1,
+            "children": {
+              "pageX": "388",
+              "pageY": "53",
+              "uri": "http://www.yelp.com/",
+              "className": "header-nav_link",
+              "count": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "pageX": "638",
+    "pageY": "66",
+    "uri": "http://www.yelp.com/biz/calave-palo-alto",
+    "className": "header-nav_link",
+    "count": 1
+  },
+  {
+    "pageX": "1031",
+    "pageY": "217",
+    "uri": "http://www.yelp.com/palo-alto",
+    "className": "star-img stars_5",
+    "count": 3,
+    "children": {
+      "pageX": "566",
+      "pageY": "152",
+      "uri": "http://www.yelp.com/biz/keens-steakhouse-new-york",
+      "className": "star-img stars_4",
+      "count": 1,
+      "children": {
+        "pageX": "557",
+        "pageY": "685",
+        "uri": "http://www.yelp.com/palo-alto",
+        "className": "star-img stars_5",
+        "count": 2,
+        "children": {
+          "pageX": "622",
+          "pageY": "58",
+          "uri": "http://www.yelp.com/palo-alto",
+          "className": "header-nav_link",
+          "count": 1,
+          "children": {
+            "pageX": "572",
+            "pageY": "154",
+            "uri": "http://www.yelp.com/biz/keens-steakhouse-new-york",
+            "className": "star-img stars_4",
+            "count": 1,
+            "children": {
+              "pageX": "572",
+              "pageY": "154",
+              "uri": "http://www.yelp.com/biz/keens-steakhouse-new-york",
+              "className": "star-img stars_4",
+              "count": 1,
+              "children": {
+                "pageX": "572",
+                "pageY": "154",
+                "uri": "http://www.yelp.com/biz/keens-steakhouse-new-york",
+                "className": "star-img stars_4",
+                "count": 1,
+                "children": {
+                  "pageX": "572",
+                  "pageY": "154",
+                  "uri": "http://www.yelp.com/biz/keens-steakhouse-new-york",
+                  "className": "star-img stars_4",
+                  "count": 1,
+                  "children": {
+                    "pageX": "572",
+                    "pageY": "154",
+                    "uri": "http://www.yelp.com/biz/keens-steakhouse-new-york",
+                    "className": "star-img stars_4",
+                    "count": 1,
+                    "children": {
+                      "pageX": "634",
+                      "pageY": "62",
+                      "uri": "http://www.yelp.com/biz/keens-steakhouse-new-york",
+                      "className": "header-nav_link",
+                      "count": 1,
+                      "children": {
+                        "pageX": "1232",
+                        "pageY": "614",
+                        "uri": "http://www.yelp.com/biz/dominique-ansel-bakery-new-york",
+                        "className": "menu-explore",
+                        "count": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "pageX": "693",
+    "pageY": "57",
+    "uri": "http://www.yelp.com/palo-alto",
+    "className": "header-nav_link",
+    "count": 1,
+    "children": {
+      "pageX": "799",
+      "pageY": "684",
+      "uri": "http://www.yelp.com/palo-alto",
+      "className": "star-img stars_5",
+      "count": 1
+    }
+  }
+];
+var result = [];
+function wrapChildrenInArray(objData){
+
+    for (key in objData) {
+      if ( objData[key].children) {
+          wrapChildrenInArray(objData[key].children);
+          objData = [objData];
+      }
+    }
+
+    return objData;
+}
+
+function generateProperJsonData(objData){
+    var newObj  = {};
+    newObj.children = objData;
+    newObj.name = "top";
+    if(newObj.children){
+        newObj = wrapChildrenInArray(newObj.children);
+    }
+    return newObj;
+}
+// console.log("start");
+// debugger;
+// jsonData = generateProperJsonData(jsonDataFacebook);
+// console.log(jsonData);
