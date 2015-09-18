@@ -1,0 +1,28 @@
+{
+  "name": "Bug Tracker",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Lets you track client side click issues",
+
+  "content_scripts": [{
+    "matches": ["http://*.yelp.com/*","http://*.facebook.com/*"],
+    "js": ["lib/jquery.min.js", "js/content.js", "js/playback.js"],
+    "run_at": "document_idle"
+  }],
+
+  "browser_action": {
+    "default_icon": "images/bug.png"
+  },
+
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "debugger",
+    "tabs",
+    "unlimitedStorage",
+    "webRequest",
+    "webNavigation",
+    "http://*.localhost:3000/*"
+
+  ]
+}
