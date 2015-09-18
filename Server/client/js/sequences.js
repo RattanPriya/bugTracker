@@ -296,7 +296,7 @@ function mouseover(d) {
 }
 function goToUrlIfLastNode(d) {
   if(!d.children){
-    console.log(d);
+    window.location.assign(d.uri);
   }
 }
 

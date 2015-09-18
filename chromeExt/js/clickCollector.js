@@ -8,7 +8,7 @@ function Queue(){
 var queue = new Queue();
 
 if (window == top) {
-  window.addEventListener('click', doSendQueueDataToExtension, false); 
+  window.addEventListener('click', doSendQueueDataToExtension, false);
 }
 
 function doSendQueueDataToExtension(){
@@ -75,7 +75,7 @@ document.onclick = function(e) {
     }
 
     console.log(click);
-    
+
     if (queue.queue.length < QUEUE_SIZE) {
         queue.queue.push(click);
         var node = document.createElement("div");                 // Create a <li> node
@@ -292,14 +292,14 @@ function generateData(objData){
     var dialogBody = document.createElement("div");
     dialogBody.setAttribute("class","ui-state-default");
     dialogBody.innerText ="Hey!";
-    
+
     dialogMessage.appendChild(dialogBody);
     document.getElementsByTagName("body")[0].appendChild(dialogBody);
 
 
     var dialogBody = document.createElement("div");
     $( ".bugTracker" ).click(function() {
-          
+
         alert( "Handler for .click() called." );
          $(function() {
             $( "#dialog" ).dialog();
@@ -317,7 +317,7 @@ function onError() {
     var dialogBody = document.createElement("div");
     dialogBody.setAttribute("class","ui-state-default");
     dialogBody.innerText ="Hey!";
-    
+
     dialogMessage.appendChild(dialogBody);
     document.getElementsByTagName("body")[0].appendChild(dialogBody);
 
@@ -338,4 +338,3 @@ function onError() {
         }
     });
 }
-

@@ -81,13 +81,3 @@ app.get('/api/all', function(req, res){
 app.listen(80, function(){
   console.log('I\'m Listening...');
 });
-
-// var http = require('http');
-// var https = require('https');
-// var server = https.createServer(require('localhost.daplie.com-certificates'),app);
-// http.createServer(app).listen(80);
-// server.listen(443, function () {
-//   console.log('Listening', server.address());
-// });
-
-
