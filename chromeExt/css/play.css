@@ -80,3 +80,20 @@ h1 {
 .social:hover, .social:focus {
   color: #2c3e50;
 }
+
+
+/*rewind*/
+
+.arrow-left {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+
+    border-right:15px solid #2c3e50;
+}
+
+.rewind:hover {
+
+}

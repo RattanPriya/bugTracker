@@ -1,4 +1,4 @@
-debugger;
+//debugger;
 
 function Player() {
 	this.state = ['start', 'play', 'pause'];
@@ -6,7 +6,7 @@ function Player() {
 };
 
 Player.prototype.init = function() {
-	debugger;
+	//debugger;
 	this.showList();
 
 }

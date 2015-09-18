@@ -31,7 +31,6 @@ var playback = new PlayBack();
 
 function PlayBack() {
     this.coordinates = queue;
-    this.stopRender = false;
     this.clicks = [];
     this.counter = 0;
     this.currentClick = null;
@@ -68,7 +67,6 @@ function Circle(x, y, error, count) {
     this.ringRadiusFadeInIncrement = .6;
     this.radiusFadeOutIncrement = .6;
     this.isFadeIn = true;
-
     this.isSelected = false;
 }
 
@@ -104,7 +102,12 @@ Circle.prototype.fadeIn = function(callback){
             this.ringRadius += this.ringRadiusFadeInIncrement;
             render();
             if (this.opacity < 1) {
-                this.fadeIn(callback.bind(this));
+
+                if (callback){
+                    this.fadeIn(callback.bind(this));
+                } else {
+                    this.fadeIn();
+                }
             }
             else{
                 this.isFadeIn = false;
@@ -123,7 +126,6 @@ Circle.prototype.fadeOut = function(callback){
         this.radius -= this.radiusFadeOutIncrement;
 
         render();
-        console.log(this.opacity);
         if (this.opacity > 0) {
             if (callback){
                 this.fadeOut(callback.bind(this));
@@ -136,6 +138,7 @@ Circle.prototype.fadeOut = function(callback){
             if (callback){
                 callback();
             }
+
             this.numBlinks++;
             this.render();
         }
@@ -158,8 +161,18 @@ Circle.prototype.render = function(){
 
 };
 
+Circle.prototype.unSelected = function() {
+    this.isSelected = false;
+    this.fadeOut();
+    render();
+};
+
 Circle.prototype.selected = function() {
     this.isSelected = true;
+    this.radius = 35;
+    this.ringRadius = 35;
+    this.opacity = 0;
+    this.fadeIn();
     render();
 };
 
@@ -215,11 +228,6 @@ function render() {
     }
 }
 
-function shouldRender() {
-    return playback.stopRender|| playback.counter == QUEUE_SIZE ? false : true
-}
-
-
 function createCanvasOverlay()
 {
     myCanvas = document.createElement('canvas');
@@ -236,23 +244,11 @@ function createCanvasOverlay()
 }
 
 
-// REWIND BUTTON
-
-
-
-function onClickRewind() {
-    playback.currentClick.selected();
-}
-
-
-
 // PROCESS COORDS
 
 function processNextCoordinate() {
     var coord = getNextCoord();
     if (!coord){
-        playback.stopRender = true;
-        playback.currentClick.selected();
         return
     }
     var circle = new Circle(coord.X, coord.Y, coord.error, playback.counter+1);
@@ -282,8 +278,7 @@ function test(){
     //var coord = dummyCoordinates[0]
     //var circle = new Circle(coord.X, coord.Y, coord.error, playback.counter+1);
     //playback.clicks.push(circle);
-    //console.log(circle);
     //circle.blink();
 }
 
-test();
+//test();
