@@ -60,12 +60,12 @@ function Circle(x, y, error, count) {
     // for blinking
     this.opacity = 0;
     this.opacityFadeInIncrement = .05;
-    this.opacityFadeOutIncrement = .04;
+    this.opacityFadeOutIncrement = .03;
 
     this.ringRadius = this.radius;
-    this.ringRadiusFadeOutIncrement = 1.2;
+    this.ringRadiusFadeOutIncrement = 1.5;
     this.ringRadiusFadeInIncrement = .6;
-    this.radiusFadeOutIncrement = .6;
+    this.radiusFadeOutIncrement = 1;
     this.isFadeIn = true;
     this.isSelected = false;
 }
@@ -126,7 +126,7 @@ Circle.prototype.fadeOut = function(callback){
         this.radius -= this.radiusFadeOutIncrement;
 
         render();
-        if (this.opacity > 0) {
+        if (this.opacity > .5) {
             if (callback){
                 this.fadeOut(callback.bind(this));
             } else {
@@ -138,7 +138,7 @@ Circle.prototype.fadeOut = function(callback){
             if (callback){
                 callback();
             }
-
+            console.log(this.opacity);
             this.numBlinks++;
             this.render();
         }
@@ -157,7 +157,7 @@ Circle.prototype.render = function(){
     }
 
     this.drawCircle();
-    this.insertNumber();
+    //this.insertNumber();
 
 };
 
@@ -178,7 +178,7 @@ Circle.prototype.selected = function() {
 
 Circle.prototype.insertNumber = function () {
     // text
-    this.context.font = '16pt Calibri';
+    this.context.font = '16pt Arial';
     this.context.textAlign= 'center';
     this.context.fillStyle = 'rgba(0,0,0,1)';
     this.context.fillText(this.count, this.x, this.y+8);

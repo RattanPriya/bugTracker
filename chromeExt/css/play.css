@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800);
 
 .play {
-    display: block;
+    display: inline-block;
     width: 0;
     height: 0;
     border-top: 15px solid transparent;
@@ -82,9 +82,15 @@ h1 {
 }
 
 
+.playContainer {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 /*rewind*/
 
 .arrow-left {
+    cursor: pointer;
     display: inline-block;
     width: 0;
     height: 0;
@@ -94,6 +100,48 @@ h1 {
     border-right:15px solid #2c3e50;
 }
 
-.rewind:hover {
 
+.rewind {
+    margin-left: 100px;
+    display: inline-block;
+    margin-right: 30px;
+    vertical-align: middle;
+
+}
+
+.rewind:hover, .rewind:focus .arrow-right{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+}
+
+.rewind:hover:before, .rewind:focus:before {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+}
+
+/*forward*/
+
+.arrow-right {
+    cursor: pointer;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+
+    border-left:15px solid #2c3e50;
+}
+.forward {
+    display: inline-block;
+    margin-left: 43px;
+    vertical-align: middle;
+
+}
+
+.forward:hover, .forward:focus .arrow-right{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
 }
