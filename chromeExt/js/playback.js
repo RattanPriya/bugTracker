@@ -265,6 +265,7 @@ function getNextCoord(){
 function startDrawing() {
 
     createCanvasOverlay();
+    createListContainer();
     processNextCoordinate();
 
 }

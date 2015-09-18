@@ -1,8 +1,19 @@
 // FORWARD BUTTON
 
 
+function Forward() {
+    this.disabled = true;
+    this.button = document.getElementsByClassName('forward')[0];
+}
+
+Forward.prototype.disable = function() {
+
+    this.button.addClass('disabled');
+    this.disabled = true;
+};
+
 function onClickForward() {
-    console.log("forward")
+    console.log("forward");
     // if current point is not selected, select it
     console.log("current click IS selected");
     console.log(playback.currentClick);

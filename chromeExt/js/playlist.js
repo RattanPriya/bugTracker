@@ -5,14 +5,17 @@ function Player() {
 	this.counter = 0;
 };
 
+
 Player.prototype.init = function() {
 	//debugger;
 	this.showList();
 
-}
+};
 
 Player.prototype.showList = function() {
+	debugger;
 	var data = queue;
+
 	var state = this.getNextState();
 	/*var list = document.createElement("ul");
 	list.setAttribute("class", "click-list");
@@ -80,7 +83,10 @@ window.onerror = function() {
 	console.log(queue[queue.length - 1]);
 	queue[queue.length - 1].error = true;
 }
-	
+
+
+
+
 var player = new Player();
 player.init();
 

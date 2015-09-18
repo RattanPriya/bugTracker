@@ -1,8 +1,7 @@
 // REWIND BUTTON
 
-
-
 function onClickRewind() {
+
     // if current point is not selected, select it
         console.log("current click IS selected")
         console.log(playback.currentClick)
