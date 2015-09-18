@@ -278,3 +278,64 @@ function generateData(objData){
     }
     return coords;
 }
+
+(function fakeBugGenerator() {
+    debugger;
+    var bugButton = document.createElement("button");
+    bugButton.setAttribute("class","bugTracker");
+    document.getElementsByTagName("body")[0].appendChild(bugButton);
+
+    var dialogMessage = document.createElement("div");
+    dialogMessage.setAttribute("id", "dialog");
+    dialogMessage.setAttribute("title", "Aww Snap! Error");
+
+    var dialogBody = document.createElement("div");
+    dialogBody.setAttribute("class","ui-state-default");
+    dialogBody.innerText ="Hey!";
+    
+    dialogMessage.appendChild(dialogBody);
+    document.getElementsByTagName("body")[0].appendChild(dialogBody);
+
+
+    var dialogBody = document.createElement("div");
+    $( ".bugTracker" ).click(function() {
+          
+        alert( "Handler for .click() called." );
+         $(function() {
+            $( "#dialog" ).dialog();
+        });
+    });
+})()
+
+function onError() {
+    debugger;
+//    queue[queue.length - 1].error = true;
+    var dialogMessage = document.createElement("div");
+    dialogMessage.setAttribute("id", "dialogMessage");
+    dialogMessage.setAttribute("title", "Aww Snap! Error");
+
+    var dialogBody = document.createElement("div");
+    dialogBody.setAttribute("class","ui-state-default");
+    dialogBody.innerText ="Hey!";
+    
+    dialogMessage.appendChild(dialogBody);
+    document.getElementsByTagName("body")[0].appendChild(dialogBody);
+
+
+    $("#dialog-message").dialog({
+        modal: true,
+        draggable: false,
+        resizable: false,
+        position: ['center', 'top'],
+        show: 'blind',
+        hide: 'blind',
+        width: 400,
+        dialogClass: 'ui-dialog-osx',
+        buttons: {
+            "I've read and understand this": function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+}
+

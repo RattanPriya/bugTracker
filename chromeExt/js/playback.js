@@ -263,12 +263,17 @@ function getNextCoord(){
 }
 
 function startDrawing() {
-    createCanvasOverlay();
-    processNextCoordinate();
+    if (queue.length > 0) {
+        createCanvasOverlay();
+        processNextCoordinate();    
+    }
+    
+
 
 }
 
 function test(){
+
     createCanvasOverlay();
 
     playback.coordinates = dummyCoordinates;

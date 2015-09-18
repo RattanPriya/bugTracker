@@ -1,5 +1,3 @@
-//debugger;
-
 function Player() {
 	this.state = ['start', 'play', 'pause'];
 	this.counter = 0;
@@ -24,14 +22,13 @@ Player.prototype.sendDataToExtension = function() {
 };
 
 Player.prototype.showList = function() {
-	debugger;
-
 	var state = this.getNextState();
 	this.sendDataToExtension();
 	startDrawing(queue.queue);
 	/*this.setVisibility();*/
 
 };
+
 
 Player.prototype.setVisibility = function() {
 	if (this.state === "play") {
@@ -70,6 +67,8 @@ Player.prototype.getNextState = function() {
 	return this.state;
 }
 
+var player = new Player();
+player.init();
 
 window.onerror = function() {
 	console.log(queue.queue[queue.queue.length - 1]);
@@ -85,4 +84,5 @@ chrome.runtime.onMessage.addListener(
 
 var player = new Player();
 player.init();
+
 
