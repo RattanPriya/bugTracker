@@ -172,7 +172,15 @@ padding:5px;
 {
 text-align:left!important;
 }
-
+.stop_button {
+    position: relative;
+    top: 13px;
+    left: 30%;
+    width: 10px;
+    height: 10px;
+    border: solid 3px;
+    background-color: black;
+}
 /* Progress bar css */
 progress[value] {
 margin-right: 25px;
@@ -197,7 +205,7 @@ background:#0E91D3;
 /* CSS3 Counter */
 
 
-.play_border {
+/*.play_border {
     margin:5px;
     border: 2px solid rgba(0,0,0,0.7);
     -webkit-border-radius: 100%;
@@ -239,4 +247,5 @@ background:#0E91D3;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     border-left: 10px solid rgba(0,0,0,0.8);
-} 
+} */
+
