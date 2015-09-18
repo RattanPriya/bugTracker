@@ -3,27 +3,27 @@
 
 // Don't delete these. They are for testing
 
-//var coordinates = [
-//    {
-//        X: 555,
-//        Y: 555,
-//        time: 0,
-//        error: false
-//    },
-//    {
-//        X: 444,
-//        Y: 100,
-//        time: 0,
-//        error: false
-//    },
-//    {
-//        X: 555,
-//        Y: 333,
-//        time: 0,
-//        error: true
-//    }
-//];
-//
+var dummyCoordinates = [
+    {
+        X: 555,
+        Y: 555,
+        time: 0,
+        error: false
+    },
+    {
+        X: 444,
+        Y: 100,
+        time: 0,
+        error: false
+    },
+    {
+        X: 555,
+        Y: 333,
+        time: 0,
+        error: true
+    }
+];
+
 
 var QUEUE_SIZE = 30;
 
@@ -72,6 +72,11 @@ function Circle(x, y, error, count) {
     this.isSelected = false;
 }
 
+
+Circle.prototype.init = function (){
+    this.blink();
+};
+
 Circle.prototype.setColor = function (){
     if (this.error){
         // Error Color
@@ -90,66 +95,62 @@ Circle.prototype.setColor = function (){
 };
 
 Circle.prototype.blink = function (numBlinks) {
-    if (this.isFadeIn){
-        this.fadeIn()
-    }
-    else {
-        this.fadeOut();
-    }
+    this.fadeIn(this.fadeOut);
 };
 
-Circle.prototype.fadeIn = function(){
-    this.opacity = this.opacity + this.opacityFadeInIncrement;
-    this.ringRadius += this.ringRadiusFadeInIncrement;
-    if (this.opacity > 1){
-        this.isFadeIn = false;
-    }
+Circle.prototype.fadeIn = function(callback){
+        setTimeout(function(){
+            this.opacity = this.opacity + this.opacityFadeInIncrement;
+            this.ringRadius += this.ringRadiusFadeInIncrement;
+            render();
+            if (this.opacity < 1) {
+                this.fadeIn(callback.bind(this));
+            }
+            else{
+                this.isFadeIn = false;
+                if (callback){
+                    callback();
+                }
+            }
+        }.bind(this), 60);
 };
 
-Circle.prototype.fadeOut = function(){
-    this.opacityIncrement = this.opacityFadeOutIncrement;
-    this.opacity -= this.opacityIncrement;
-    this.ringRadius -= this.ringRadiusFadeOutIncrement;
-    this.radius -= this.radiusFadeOutIncrement;
+Circle.prototype.fadeOut = function(callback){
+    setTimeout(function(){
+        this.opacityIncrement = this.opacityFadeOutIncrement;
+        this.opacity -= this.opacityIncrement;
+        this.ringRadius -= this.ringRadiusFadeOutIncrement;
+        this.radius -= this.radiusFadeOutIncrement;
 
-    if (this.opacity < 0){
-        this.isFadeIn = true;
-        this.numBlinks++
-    }
+        render();
+        console.log(this.opacity);
+        if (this.opacity > 0) {
+            if (callback){
+                this.fadeOut(callback.bind(this));
+            } else {
+                this.fadeOut();
+            }
+        }
+        else{
+            this.isFadeIn = true;
+            if (callback){
+                callback();
+            }
+            this.numBlinks++;
+            this.render();
+        }
+    }.bind(this), 60);
 };
 
 Circle.prototype.render = function(){
 
-    // draw the Circle. If the circle has completed one fade in cycle, initialRenderComplete is true and we get the next coordinate.
-    if (this.initialRenderComplete && !this.retrievedNext) {
+    //// draw the Circle. If the circle has completed one fade in cycle, initialRenderComplete is true and we get the next coordinate.
+
+    if (this.numBlinks == 1 && !this.retrievedNext){
         this.retrievedNext = true;
         setTimeout(function(){
             processNextCoordinate();
         }, 1)
-    } else {
-        if (this.numBlinks == 1){
-            this.initialRenderComplete = true;
-        }
-
-        if (!this.initialRenderComplete){
-            this.blink();
-        } else {
-
-            // if error
-            if (this.error){
-                this.opacity = .5;
-            }
-
-            if (this.isSelected){
-                this.radius = 35;
-                this.ringRadius = 45;
-                this.opacity = .5;
-            } else {
-                // initial render is complete so fix the radius of the bubbles
-                this.ringRadius = 15;
-                this.radius = 15;
-            }
-        }
     }
 
     this.drawCircle();
@@ -161,19 +162,6 @@ Circle.prototype.selected = function() {
     this.isSelected = true;
     render();
 };
-
-Circle.prototype.pulse = function() {
-    if (this.opacity > 1){
-        this.opacity = 1;
-        this.ringRadius = 10;
-    }
-
-    if (this.isFadeIn){
-        this.fadeIn()
-    } else {
-        this.fadeOut();
-    }
-}
 
 Circle.prototype.insertNumber = function () {
     // text
@@ -252,7 +240,9 @@ function createCanvasOverlay()
 
 
 
-
+function onClickRewind() {
+    playback.currentClick.selected();
+}
 
 
 
@@ -269,7 +259,7 @@ function processNextCoordinate() {
     playback.clicks.push(circle);
     playback.currentClick = playback.clicks[playback.counter];
     playback.counter++;
-    circle.render();
+    circle.blink();
 }
 
 function getNextCoord(){
@@ -278,20 +268,22 @@ function getNextCoord(){
 
 function startDrawing() {
 
-
     createCanvasOverlay();
     processNextCoordinate();
 
-    timeout();
 }
 
+function test(){
+    createCanvasOverlay();
 
-function timeout () {
-    setTimeout(function() {
-        if (shouldRender()){
-            render();
-            timeout();
-        }
+    playback.coordinates = dummyCoordinates;
 
-    }, 15);
+    processNextCoordinate();
+    //var coord = dummyCoordinates[0]
+    //var circle = new Circle(coord.X, coord.Y, coord.error, playback.counter+1);
+    //playback.clicks.push(circle);
+    //console.log(circle);
+    //circle.blink();
 }
+
+test();
