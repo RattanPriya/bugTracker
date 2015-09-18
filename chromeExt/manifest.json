@@ -5,13 +5,14 @@
   "description": "Lets you track client side click issues",
 
   "content_scripts": [{
-  	"matches": ["http://*.yelp.com/*","http://*.facebook.com/*"],
-    "js": ["lib/jquery.min.js", "js/content.js", "js/playback.js"],
+  	"matches": ["http://*.yelp.com/*","https://*.facebook.com/*"],
+    "css": ["css/play.css"],
+    "js": [ "js/lib/jquery.min.js","js/clickCollector.js","js/playback.js" ],
     "run_at": "document_idle"
   }],
 
   "browser_action": {
-    "default_icon": "images/bug.png",
+    "default_icon": "images/appd.png",
     "default_popup": "playlistView.html"
   },
 

@@ -1,6 +1,5 @@
 // Here You can type your custom JavaScript...
-
-
+debugger;
 var queue = [];
 var QUEUE_SIZE = 30;
 
@@ -10,6 +9,7 @@ dataDump.setAttribute("style", "visibility: hidden");
  document.getElementsByTagName("body")[0].appendChild(dataDump)
 
 document.onclick = function(e) {
+
   var value = '';
   var text = '';
   var id = '';
@@ -47,9 +47,13 @@ document.onclick = function(e) {
         closesttext: text,
         sessionid: value
     }
+    
     if (id!=='none') {
           click.id = id;
     }
+    
+    console.log(click);
+    
     if (queue.length < QUEUE_SIZE) {
         queue.push(click);
         var node = document.createElement("div");                 // Create a <li> node
