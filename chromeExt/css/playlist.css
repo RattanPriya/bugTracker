@@ -100,9 +100,9 @@ text-transform: uppercase;
 }
 h2{color:#999999;font-size: 16px;padding:0px 15px 5px 15px;}
 
-ul{padding:0px 0px 15px 0px;counter-reset: section;visibility: hidden;}
+.class-list{padding:0px 0px 15px 0px;counter-reset: section;visibility: hidden;}
 
-ul li
+.class-list-item
 {
 list-style-type:none;
 padding:15px 25px 15px 15px;
@@ -120,7 +120,8 @@ transition:0.2s;
 text-transform: uppercase;
 }
 
-li:hover
+.class-list-item
+:hover
 {
 background:#efefef;
 -webkit-transition:0.2s;
@@ -130,8 +131,8 @@ background:#efefef;
 transition:0.2s;
 }
 
-ol li:first-child{border-top:none;}
-ol li:last-child{border-bottom:none;}
+.class-list-item:first-child{border-top:none;}
+.class-list-item:last-child{border-bottom:none;}
 
 .time
 {
@@ -139,7 +140,7 @@ float:right;
 color:#999999;
 }
 
-.active
+/*.active
 {
 background:#efefef;
 }
@@ -166,9 +167,9 @@ text-align:left!important;
     height: 10px;
     border: solid 3px;
     background-color: black;
-}
+}*/
 /* Progress bar css */
-progress[value] {
+/*progress[value] {
 margin-right: 25px;
 margin-left: 25px;
 width: 350px;
@@ -177,16 +178,16 @@ height:16px;
 appearance: none;
 border: 0px solid #000; 
 margin-bottom:1px; 
-}
+/*}*/
 
-progress[value]::-webkit-progress-bar {
+/*progress[value]::-webkit-progress-bar {
 background-color: #eee;
 border-radius: 0px;
 }
 
 progress[value]::-webkit-progress-value {
 background:#0E91D3;
-}
+}*/
 
 /* CSS3 Counter */
 

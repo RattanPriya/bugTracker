@@ -3,11 +3,13 @@
   "version": "0.1",
   "manifest_version": 2,
   "description": "Lets you track client side click issues",
-
+  "background": {
+      "scripts": ["js/background.js"]
+  },
   "content_scripts": [{
-  	"matches": ["http://*/","https://*/"],
-    "css": ["css/play.css"],
-    "js": [ "js/lib/jquery.min.js","js/clickCollector.js","js/playback.js" ],
+  	"matches": ["http://*/*","https://*/*","localhost:8080/*"],
+    "css": ["css/play.css", "css/playlist.css"],
+    "js": [ "js/lib/jquery.min.js","js/clickCollector.js","js/playback.js", "js/content-scripts.js" ],
     "run_at": "document_idle"
   }],
 
@@ -24,9 +26,7 @@
     "unlimitedStorage",
     "webRequest",
     "webNavigation",
-    "http://*.localhost:3000/*",
-    "http://*/",
-    "https://*/"
+    "http://*.localhost:3000/*"
 
   ]
 }

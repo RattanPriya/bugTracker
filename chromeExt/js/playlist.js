@@ -14,18 +14,26 @@ Player.prototype.init = function() {
 Player.prototype.showList = function() {
 	var data = queue;
 	var state = this.getNextState();
-	/*var list = document.getElementById("click-list");*/
-	startDrawing();
-	/*list.textContent = '';*/
-	this.setVisibility();
+	var list = document.createElement("ul");
+	list.setAttribute("class", "click-list");
+	document.getElementById("ChatTabsPagelet").appendChild(list);
+	startDrawing(list);
+	list.textContent = '';
+	/*this.setVisibility();*/
 	for (var i = queue.length - 1; i >= 0; i--) {
 		var click = queue[i];
 		var item = document.createElement("li");
-		//<li>Blessing it <span class="time">3:24</span></li>
+		
+		item.setAttribute("class", "class-list-item")
+		
+		if (click.error) {
+			item.setAttribute("class", "class-list-item-error");
+		}
+
 		var textnode = document.createTextNode(click.X + " " + click.Y);
 		item.appendChild(textnode);
 		list.appendChild(item);
-		console.log(document.elementFromPoint(click.X, click.Y));
+
 	}
 }
 
