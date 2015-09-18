@@ -157,7 +157,7 @@ Circle.prototype.render = function(){
     }
 
     this.drawCircle();
-    //this.insertNumber();
+    this.insertNumber();
 
 };
 

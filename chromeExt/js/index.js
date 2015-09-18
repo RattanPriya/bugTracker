@@ -109,7 +109,7 @@
 				item.setAttribute("class", "class-list-item-error");
 			}
 
-			var textnode = document.createTextNode(click.X + ", " + click.Y + ": " + click.closesttext);
+			var textnode = document.createTextNode(click.closesttext);
 			item.appendChild(textnode);
 			list.appendChild(item);
 		}

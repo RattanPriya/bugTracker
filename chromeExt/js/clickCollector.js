@@ -47,15 +47,17 @@ document.onclick = function(e) {
     }
   }
 
-    if($(e.target).is('a')){
-       text = $(e.target).html();
-    } else if(text == '') {
-       text = $(e.target).closest("div").siblings("span").text();
+    if(text == '' && ($(e.target).closest("a").context != undefined)
+        && ($(e.target).closest("a").context.outerText != undefined)) {
+        text = $(e.target).closest("a").context.outerText.substring(0,20);
     }
-
-    if($(e.target).parent().closest('div[id]') != '' &&
-    $(e.target).parent().closest('div[id]') != 'undefined'){
-      id = $(e.target).parent().closest('div[id]')[0]? $(e.target).parent().closest('div[id]')[0].id : 'none';
+    if(text.trim() == '' && ($(e.target).closest("a").context != undefined)
+        && ($(e.target).closest("a").context.innerText != undefined)) {
+        text = $(e.target).closest("a").context.innerText.substring(0,20);
+    }
+    if(text.trim() == '' && ($(e.target).closest("a").context != undefined)
+        && ($(e.target).closest("a").context.placeholder != undefined)) {
+        text = $(e.target).closest("a").context.placeholder.substring(0,20);
     }
 
     var click = {

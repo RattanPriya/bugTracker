@@ -7,8 +7,10 @@ function Player() {
 
 
 Player.prototype.init = function() {
-	//debugger;
-	this.showList();
+	setTimeout(function(){
+		this.showList();
+
+	}, 2000)
 
 };
 
@@ -24,7 +26,6 @@ Player.prototype.sendDataToExtension = function() {
 };
 
 Player.prototype.showList = function() {
-	debugger;
 
 	var state = this.getNextState();
 	this.sendDataToExtension();
