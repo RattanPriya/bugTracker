@@ -78,7 +78,7 @@ window.onerror = function(){
 
 window.onload = init();
 function init() {
-	debugger;
+	//debugger;
 	var player = new Player();
 	player.init();
 }

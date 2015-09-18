@@ -3,26 +3,26 @@
 
 // Don't delete these. They are for testing
 
-    /*var coordinates = [
-        {
-            pageX: 555,
-            pageY: 555,
-            time: 0,
-            error: false
-        },
-        {
-            pageX: 444,
-            pageY: 100,
-            time: 0,
-            error: false
-        },
-        {
-            pageX: 555,
-            pageY: 333,
-            time: 0,
-            error: false
-        }
-    ];*/
+//var coordinates = [
+//    {
+//        pageX: 555,
+//        pageY: 555,
+//        time: 0,
+//        error: false
+//    },
+//    {
+//        pageX: 444,
+//        pageY: 100,
+//        time: 0,
+//        error: false
+//    },
+//    {
+//        pageX: 555,
+//        pageY: 333,
+//        time: 0,
+//        error: false
+//    }
+//];
 
 
 
@@ -39,7 +39,7 @@ function Circle(x, y, count) {
 
     this.canvas = document.getElementById("myCanvas");
     this.context = this.canvas.getContext("2d");
-    this.radius = 10;
+    this.radius = 35;
     this.r = 57;
     this.g = 195;
     this.b = 254;
@@ -50,13 +50,17 @@ function Circle(x, y, count) {
 
     this.count = count;
 
-    this.strokeStyle = "#39c3fe  ";
+    this.strokeStyle = "#39c3fe";
 
     // for blinking
     this.opacity = 0;
-    this.opacityIncrement = .05;
+    this.opacityFadeInIncrement = .05;
+    this.opacityFadeOutIncrement = .04;
+
     this.ringRadius = this.radius;
-    this.radiusIncrement = .6;
+    this.ringRadiusFadeOutIncrement = 1.2;
+    this.ringRadiusFadeInIncrement = .6;
+    this.radiusFadeOutIncrement = .6;
     this.isFadeIn = true;
 }
 
@@ -70,18 +74,18 @@ Circle.prototype.blink = function (numBlinks) {
 };
 
 Circle.prototype.fadeIn = function(){
-    this.opacity = this.opacity + this.opacityIncrement;
-    this.ringRadius += this.radiusIncrement;
+    this.opacity = this.opacity + this.opacityFadeInIncrement;
+    this.ringRadius += this.ringRadiusFadeInIncrement;
     if (this.opacity > 1){
-        console.log("fade");
         this.isFadeIn = false;
     }
 };
 
-
 Circle.prototype.fadeOut = function(){
-    this.opacity = this.opacity - this.opacityIncrement;
-    this.ringRadius -= this.radiusIncrement;
+    this.opacityIncrement = this.opacityFadeOutIncrement;
+    this.opacity -= this.opacityIncrement;
+    this.ringRadius -= this.ringRadiusFadeOutIncrement;
+    this.radius -= this.radiusFadeOutIncrement;
 
     if (this.opacity < 0){
         this.isFadeIn = true;
@@ -93,17 +97,19 @@ Circle.prototype.render = function(){
     // draw the Circle. If the circle has completed one fade in cycle, initialRenderComplete is true and we get the next coordinate.
     if (this.initialRenderComplete && !this.retrievedNext) {
         this.retrievedNext = true;
-        processNextCoordinate();
+        setTimeout(function(){
+            processNextCoordinate();
+        }, 100)
     } else {
         if (this.numBlinks == 1){
             this.initialRenderComplete = true;
         }
 
-        if (this.initialRenderComplete){
-            this.radiusIncrement = .2
-            this.pulse();
-        } else {
+        if (!this.initialRenderComplete){
             this.blink();
+        } else {
+            this.ringRadius = 15;
+            this.radius = 15;
         }
     }
 
@@ -115,7 +121,7 @@ Circle.prototype.render = function(){
 Circle.prototype.pulse = function() {
     if (this.opacity > 1){
         this.opacity = 1;
-        this.ringRadius = 10+20*.2;
+        this.ringRadius = 10;
     }
 
     if (this.isFadeIn){
@@ -231,11 +237,10 @@ function startDrawing() {
 
 function timeout () {
     setTimeout(function() {
-        // if (shouldRender()){
-        render();
-        timeout();
+        //if (shouldRender()){
+            render();
+            timeout();
         //}
 
     }, 60);
 }
-
