@@ -1,15 +1,20 @@
 // Here You can type your custom JavaScript...
 //debugger;
 
+function Queue(){
+    this.queue = [];
+}
+
+var queue = new Queue();
 
 if (window == top) {
   window.addEventListener('click', doSendQueueDataToExtension, false); 
 }
 
 function doSendQueueDataToExtension(){
-  if (queue.length > 0){ 
-    JSON.stringify(queue);
-    chrome.extension.sendRequest({queue: queue});
+  if (queue.queue.length > 0){
+    JSON.stringify(queue.queue);
+    chrome.extension.sendRequest({queue: queue.queue});
   }
 }
 
@@ -18,7 +23,6 @@ chrome.runtime.onMessage.addListener(
         JSON.stringify(queue);
     });
 
-var queue = [];
 var QUEUE_SIZE = 30;
 
 var dataDump = document.createElement("div");
@@ -72,16 +76,16 @@ document.onclick = function(e) {
     
     console.log(click);
     
-    if (queue.length < QUEUE_SIZE) {
-        queue.push(click);
+    if (queue.queue.length < QUEUE_SIZE) {
+        queue.queue.push(click);
         var node = document.createElement("div");                 // Create a <li> node
         var textnode = document.createTextNode(JSON.stringify(click));         // Create a text node
         node.appendChild(textnode);                              // Append the text to <li>
         document.getElementById("data_dump").appendChild(node)
 
     } else {
-        queue.shift(1);
-        queue.push(click);
+        queue.queue.shift(1);
+        queue.queue.push(click);
     }
 
 }

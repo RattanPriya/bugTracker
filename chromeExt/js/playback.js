@@ -30,7 +30,7 @@ var QUEUE_SIZE = 30;
 var playback = new PlayBack();
 
 function PlayBack() {
-    this.coordinates = queue;
+    this.coordinates = queue.queue;
     this.clicks = [];
     this.counter = 0;
     this.currentClick = null;
@@ -263,9 +263,7 @@ function getNextCoord(){
 }
 
 function startDrawing() {
-
     createCanvasOverlay();
-    createListContainer();
     processNextCoordinate();
 
 }

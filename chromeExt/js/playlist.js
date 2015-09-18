@@ -12,48 +12,40 @@ Player.prototype.init = function() {
 
 };
 
+Player.prototype.sendDataToExtension = function() {
+	chrome.runtime.sendMessage({queue: queue.queue, greeting: "hello"}, function(response) {
+		console.log("sendMessageResponse: "+ response);
+		if (!response){
+			this.sendDataToExtension();
+		} else {
+			return;
+		}
+	}.bind(this));
+};
+
 Player.prototype.showList = function() {
 	debugger;
-	var data = queue;
 
 	var state = this.getNextState();
-	/*var list = document.createElement("ul");
-	list.setAttribute("class", "click-list");
-	document.getElementById("ChatTabsPagelet").appendChild(list);*/
-	var list = document.getElementById("class-list");
-	startDrawing(list);
-	list.textContent = '';
+	this.sendDataToExtension();
+	startDrawing(queue.queue);
 	/*this.setVisibility();*/
-	for (var i = queue.length - 1; i >= 0; i--) {
-		var click = queue[i];
-		var item = document.createElement("li");
-		
-		item.setAttribute("class", "class-list-item")
-		
-		if (click.error) {
-			item.setAttribute("class", "class-list-item-error");
-		}
 
-		var textnode = document.createTextNode(click.X + " " + click.Y);
-		item.appendChild(textnode);
-		list.appendChild(item);
-
-	}
-}
+};
 
 Player.prototype.setVisibility = function() {
 	if (this.state === "play") {
 		var list = document.getElementById("click-list");
 		list.style.visibility = "visible";
-		document.onclick = function() {
-			var click = queue.unshift();
-			var item = document.createElement("li");
-			var textnode = document.createTextNode(click.X + " " + click.Y);
-			document.getElementById(click.parentid).style.border = "3px solid red";
-			item.appendChild(textnode);
-			list.appendChild(item);
-			console.log(document.elementFromPoint(click.X, click.Y));
-		}
+		//document.onclick = function() {
+		//	var click = queue.unshift();
+		//	var item = document.createElement("li");
+		//	var textnode = document.createTextNode(click.X + " " + click.Y);
+		//	document.getElementById(click.parentid).style.border = "3px solid red";
+		//	item.appendChild(textnode);
+		//	list.appendChild(item);
+		//	console.log(document.elementFromPoint(click.X, click.Y));
+		//}
 
 
 	} else if (this.state === "start") {
@@ -80,12 +72,16 @@ Player.prototype.getNextState = function() {
 
 
 window.onerror = function() {
-	console.log(queue[queue.length - 1]);
-	queue[queue.length - 1].error = true;
+	console.log(queue.queue[queue.queue.length - 1]);
+	queue.queue[queue.queue.length - 1].error = true;
 }
 
-
-
+chrome.runtime.onMessage.addListener(
+	function(request, sender, sendResponse) {
+		if (request.greeting == "queue"){
+			sendResponse({queue: queue.queue});
+		}
+	});
 
 var player = new Player();
 player.init();

@@ -5,13 +5,19 @@
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log(request);
-        onListItemHover();
-        if (request.greeting == "hello")
-            sendResponse({farewell: "goodbye"});
+        if (request.greeting == "listItemClick"){
+            onListItemHover();
+        }
+
     });
 
 function onListItemHover(){
-    debugger;
+    var click = playback.clicks[0];
+    console.log(click)
+    if (!click.isSelected){
+        click.selected();
+    } else {
+        click.blink();
+    }
 }
 
