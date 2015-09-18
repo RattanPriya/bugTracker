@@ -7,10 +7,7 @@ var express      = require('express'),
 
 var url = 'mongodb://localhost:27017/test';
 var db = require('mongoskin').db(url);
-var http = require('http').Server(app);
-
 var testdb = db.collection("test");
-
 
 //app.use(morgan('dev'));
 app.use(cookieParser());
@@ -27,6 +24,9 @@ app.use('/', express.static(__dirname+'/client/views'));
 //Home Page
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/client/views/home.html');
+});
+app.get('/sequence', function(req, res){
+  res.sendFile(__dirname + '/client/views/sequence.html');
 });
 
 //Can pass data through url
@@ -78,6 +78,16 @@ app.get('/api/all', function(req, res){
   });
 });
 
-app.listen(3000, function(){
+app.listen(80, function(){
   console.log('I\'m Listening...');
 });
+
+// var http = require('http');
+// var https = require('https');
+// var server = https.createServer(require('localhost.daplie.com-certificates'),app);
+// http.createServer(app).listen(80);
+// server.listen(443, function () {
+//   console.log('Listening', server.address());
+// });
+
+

@@ -69,11 +69,11 @@ document.onclick = function(e) {
         closesttext: text,
         sessionid: value
     }
-    
+
     if (id!=='none') {
           click.id = id;
     }
-    
+
     console.log(click);
     
     if (queue.queue.length < QUEUE_SIZE) {
@@ -107,4 +107,174 @@ function setCookie(cname, cvalue) {
     d2 = new Date ( d1 );
     d2.setMinutes ( d1.getMinutes() + 5 );
     document.cookie = cname + "=" + cvalue + "&" + d2;
+}
+
+var jsonData =
+{
+  "className": "top",
+  "children": [
+    {
+      "pageX": "1022",
+      "pageY": "216",
+      "uri": "http://www.yelp.com/",
+      "className": "star-img stars_4",
+      "count": 2,
+      "children": [
+        {
+          "pageX": "1022",
+          "pageY": "219",
+          "uri": "http://www.yelp.com/",
+          "className": "star-img stars_4",
+          "count": 1,
+          "children": [
+            {
+              "pageX": "1022",
+              "pageY": "219",
+              "uri": "http://www.yelp.com/",
+              "className": "star-img stars_4",
+              "count": 1,
+              "children": [
+                {
+                  "pageX": "1022",
+                  "pageY": "219",
+                  "uri": "http://www.yelp.com/",
+                  "className": "star-img stars_4",
+                  "count": 1,
+                  "children": [
+                    {
+                      "pageX": "1022",
+                      "pageY": "219",
+                      "uri": "http://www.yelp.com/",
+                      "className": "star-img stars_4",
+                      "count": 1,
+                      "children": [
+                        {
+                          "pageX": "1022",
+                          "pageY": "219",
+                          "uri": "http://www.yelp.com/",
+                          "className": "star-img stars_4",
+                          "count": 1,
+                          "children": [
+                            {
+                              "pageX": "558",
+                              "pageY": "686",
+                              "uri": "http://www.yelp.com/",
+                              "className": "star-img stars_5",
+                              "count": 1,
+                              "children": [
+                                {
+                                  "pageX": "350",
+                                  "pageY": "703",
+                                  "uri": "http://www.yelp.com/",
+                                  "className": "category-title",
+                                  "count": 1,
+                                  "children": [
+                                    {
+                                      "pageX": "301",
+                                      "pageY": "775",
+                                      "uri": "http://www.yelp.com/",
+                                      "className": "category-title",
+                                      "count": 1,
+                                      "children": [
+                                        {
+                                          "pageX": "317",
+                                          "pageY": "820",
+                                          "uri": "http://www.yelp.com/",
+                                          "className": "category-title",
+                                          "count": 1,
+
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageX": "319",
+      "pageY": "144",
+      "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
+      "className": "star-img stars_5",
+      "count": 1,
+      "children": [
+        {
+          "pageX": "353",
+          "pageY": "149",
+          "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
+          "className": "star-img stars_5",
+          "count": 1,
+          "children": [
+            {
+              "pageX": "664",
+              "pageY": "65",
+              "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
+              "className": "header-nav_link",
+              "count": 1,
+              "children": [
+                {
+                  "pageX": "391",
+                  "pageY": "55",
+                  "uri": "http://www.yelp.com/biz/greenhearts-family-farm-csa-san-francisco",
+                  "className": "header-nav_link",
+                  "count": 1,
+                  "children": [
+                    {
+                      "pageX": "317",
+                      "pageY": "856",
+                      "uri": "http://www.yelp.com/",
+                      "className": "category-title",
+                      "count": 1,
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageX": "469",
+      "pageY": "51",
+      "uri": "http://www.yelp.com/",
+      "className": "header-nav_link",
+      "count": 1,
+      "children": [
+        {
+          "pageX": "695",
+          "pageY": "167",
+          "uri": "http://www.yelp.com/chicago",
+          "className": "embossed-text-white",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}
+
+function generateData(objData){
+    var coords = [];
+    while(objData.children){
+        var coord =
+        {
+            name : objData.children[0].name,
+            pageX : objData.children[0].pageX,
+            pageY : objData.children[0].pageY
+        };
+        coords.push(coord);
+        objData = objData.children[0];
+    }
+    return coords;
 }
