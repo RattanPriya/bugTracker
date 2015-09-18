@@ -10,8 +10,20 @@ dataDump.setAttribute("style", "visibility: hidden");
  document.getElementsByTagName("body")[0].appendChild(dataDump)
 
 document.onclick = function(e) {
-    var text = '';
-    var id = '';
+  var value = '';
+  var text = '';
+  var id = '';
+  if(getCookie() == undefined){
+    setCookie("cname",1)
+  } else{
+    var value = getCookie("cname").split('&')[0];
+    var dateString = getCookie("cname").split('&')[1];
+    var date = new Date(dateString);
+    var currentDate = new Date();
+    if(currentDate > date){
+      setCookie("cname",parseInt(value) + 1);
+    }
+  }
 
     if($(e.target).is('a')){
        text = $(e.target).html();
@@ -33,8 +45,7 @@ document.onclick = function(e) {
         id: e.target.id,
         uri: e.currentTarget.baseURI,
         closesttext: text,
-      
-
+        sessionid: value
     }
     if (id!=='none') {
           click.id = id;
@@ -51,4 +62,23 @@ document.onclick = function(e) {
         queue.push(click);
     }
 
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var cookiearray = document.cookie.split(';');
+    for(var i=0; i<cookiearray.length; i++){
+        var key = cookiearray[i].split('=')[0];
+        var value = cookiearray[i].split('=')[1];
+        if (key.trim() == "cname"){
+        return value;
+        }
+    }
+}
+
+function setCookie(cname, cvalue) {
+    var d1 = new Date ();
+    d2 = new Date ( d1 );
+    d2.setMinutes ( d1.getMinutes() + 5 );
+    document.cookie = cname + "=" + cvalue + "&" + d2;
 }
