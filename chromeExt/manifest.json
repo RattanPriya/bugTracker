@@ -11,7 +11,7 @@
   }],
 
   "browser_action": {
-    "default_icon": "images/bug.png"
+    "default_icon": "images/appd.png"
   },
 
   "permissions": [
