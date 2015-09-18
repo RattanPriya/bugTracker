@@ -7,9 +7,9 @@
       "scripts": ["js/background.js"]
   },
   "content_scripts": [{
-  	"matches": ["http://*/*","https://*/*","localhost:8080/*"],
-    "css": ["css/play.css", "css/playlist.css"],
-    "js": [ "js/lib/jquery.min.js","js/clickCollector.js","js/playback.js", "js/content-scripts.js" ],
+    "matches": ["http://*/*","https://*/*","http://localhost:8080/*"],
+    "css": ["css/jquery-ui.css", "css/play.css", "css/playlist.css"],
+    "js": ["js/lib/jquery.min.js", "js/lib/jquery-ui.js" ,"js/clickCollector.js","js/playback.js", "js/content-scripts.js"],
     "run_at": "document_idle"
   }],
 

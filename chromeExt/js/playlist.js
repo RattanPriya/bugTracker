@@ -14,9 +14,10 @@ Player.prototype.init = function() {
 Player.prototype.showList = function() {
 	var data = queue;
 	var state = this.getNextState();
-	var list = document.createElement("ul");
+	/*var list = document.createElement("ul");
 	list.setAttribute("class", "click-list");
-	document.getElementById("ChatTabsPagelet").appendChild(list);
+	document.getElementById("ChatTabsPagelet").appendChild(list);*/
+	var list = document.getElementById("class-list");
 	startDrawing(list);
 	list.textContent = '';
 	/*this.setVisibility();*/
@@ -82,3 +83,4 @@ window.onerror = function() {
 	
 var player = new Player();
 player.init();
+

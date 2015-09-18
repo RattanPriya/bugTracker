@@ -1,5 +1,23 @@
 // Here You can type your custom JavaScript...
 //debugger;
+
+
+if (window == top) {
+  window.addEventListener('click', doSendQueueDataToExtension, false); 
+}
+
+function doSendQueueDataToExtension(){
+  if (queue.length > 0){ 
+    JSON.stringify(queue);
+    chrome.extension.sendRequest({queue: queue});
+  }
+}
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender) {
+        JSON.stringify(queue);
+    });
+
 var queue = [];
 var QUEUE_SIZE = 30;
 

@@ -115,7 +115,7 @@ Circle.prototype.fadeIn = function(callback){
                     callback();
                 }
             }
-        }.bind(this), 60);
+        }.bind(this), 15);
 };
 
 Circle.prototype.fadeOut = function(callback){

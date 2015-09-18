@@ -1,8 +1,8 @@
-var backgroundScriptMessage = " purple monkey dishwasher";
+var queue = [];
 
 chrome.extension.onRequest.addListener(function(request, sender) 
 {
-	alert("Background script has received a message from contentscript:'" + request.message + "'");
+	var queue = request.queue;
 	returnMessage(request.message);
 });
 
@@ -10,7 +10,6 @@ function returnMessage(messageToReturn)
 {
 	chrome.tabs.getSelected(null, function(tab) {
 		var joinedMessage = messageToReturn + backgroundScriptMessage;		
-		alert("Background script is sending a message to contentscript:'" + joinedMessage +"'");
 		chrome.tabs.sendMessage(tab.id, {message: joinedMessage});
 	});
 }
