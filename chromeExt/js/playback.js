@@ -168,6 +168,7 @@ Circle.prototype.unSelected = function() {
 };
 
 Circle.prototype.selected = function() {
+    playback.currentClick = this;
     this.isSelected = true;
     this.radius = 35;
     this.ringRadius = 35;
