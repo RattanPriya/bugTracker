@@ -5,7 +5,7 @@
   "description": "Lets you track client side click issues",
 
   "content_scripts": [{
-  	"matches": ["http://*.yelp.com/*","https://*.facebook.com/*"],
+  	"matches": ["http://*/","https://*/"],
     "css": ["css/play.css"],
     "js": [ "js/lib/jquery.min.js","js/clickCollector.js","js/playback.js" ],
     "run_at": "document_idle"
@@ -24,7 +24,9 @@
     "unlimitedStorage",
     "webRequest",
     "webNavigation",
-    "http://*.localhost:3000/*"
+    "http://*.localhost:3000/*",
+    "http://*/",
+    "https://*/"
 
   ]
 }
