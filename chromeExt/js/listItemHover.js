@@ -6,18 +6,16 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.greeting == "listItemClick"){
-            onListItemHover();
+            onListItemHover(request.id);
         }
 
     });
 
-function onListItemHover(){
-    var click = playback.clicks[0];
-    console.log(click)
+function onListItemHover(id){
+    var click = playback.clicks[id];
+    playback.currentClick.unSelected();
     if (!click.isSelected){
         click.selected();
-    } else {
-        click.blink();
     }
 }
 

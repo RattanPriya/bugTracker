@@ -57,9 +57,9 @@
 		});
 	}
 
-	document.getElementsByClassName('listTest')[0].onclick = function () {
+	document.getElementById('click-list').onclick = function (e) {
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			chrome.tabs.sendMessage(tabs[0].id, {greeting: "listItemClick", id: 0}, function(response) {
+			chrome.tabs.sendMessage(tabs[0].id, {greeting: "listItemClick", id: e.target.id}, function(response) {
 			});
 		});
 	};
@@ -92,17 +92,22 @@
 	function drawList(queue) {
 		var list = document.getElementById("click-list");
 
+		while (list.hasChildNodes()) {
+			list.removeChild(list.lastChild);
+		}
 		for (var i = queue.length - 1; i >= 0; i--) {
 			var click = queue[i];
 			var item = document.createElement("li");
 
 			item.setAttribute("class", "class-list-item")
+			item.setAttribute("class", "class-list-item")
 
+			item.setAttribute("id", i)
 			if (click.error) {
 				item.setAttribute("class", "class-list-item-error");
 			}
 
-			var textnode = document.createTextNode(click.X + ", " + click.Y + ": " + click.closesttext);
+			var textnode = document.createTextNode(click.closesttext);
 			item.appendChild(textnode);
 			list.appendChild(item);
 		}
