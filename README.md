@@ -6,3 +6,4 @@ Using the Server
 3. Install server side dependencies with npm `npm install`
 4. Install client side dependencies with bower `bower install`
 5. Run the server on localhost:3000 `node server`
+![alt tag](https://github.com/RattanPriya/bugTracker/blob/master/bugTracker.gif)
