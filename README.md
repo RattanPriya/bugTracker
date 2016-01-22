@@ -1,4 +1,6 @@
-
+The purpose of this app to track any user activity on any client. This can be a powerful tool for designers and PMs to make deicssions about how users interact with their apps. 
+The gif demos our code against facebook as a client but technically we can use any client.
+Once we gather all the metrics, we can put this data into any viz tool and find out interesting user behaviors.
 Using the Server
 ----------------
 1. Need to install and run mongodb database
